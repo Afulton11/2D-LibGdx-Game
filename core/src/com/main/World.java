@@ -1,8 +1,6 @@
 package com.main;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.Map;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Pool;
@@ -43,9 +41,9 @@ public class World {
 	}
 	
 	public void render(SpriteBatch batch, float delta) {
-		for(Bullet b : activeBullets) {
+//		for(Bullet b : activeBullets) {
 //			batch.draw(Main.bucketImage, b.position.x, b.position.y);
-		}
+//		}
 	}
 	
 	public void dispose() {

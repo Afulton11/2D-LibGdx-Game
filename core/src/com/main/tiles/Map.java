@@ -9,7 +9,7 @@ public class Map{
 	private int tileWidth, tileHeight;
 	
 	private Array<Tile> tiles;
-	
+		
 	public Map() {}
 	
 	public Map(int tileWidth, int tileHeight, Array<Tile> tiles) {
@@ -17,6 +17,12 @@ public class Map{
 		this.tileWidth = tileWidth;
 		
 		this.tiles = tiles;
+	}
+	
+	public Map(int tileWidth, int tileHeight) {
+		this.tileWidth = tileWidth;
+		this.tileHeight = tileHeight;
+		this.tiles = new Array<Tile>();
 	}
 
 	public void render(SpriteBatch batch) {
@@ -40,6 +46,10 @@ public class Map{
 	
 	public Array<Tile> getTiles() {
 		return tiles;
+	}
+	
+	public void setTiles(Tile... tiles) {
+		this.tiles.addAll(tiles);
 	}
 	
 	public Tile getTileAt(TileCoord tileCoord) {

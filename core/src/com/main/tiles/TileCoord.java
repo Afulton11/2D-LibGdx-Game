@@ -15,6 +15,9 @@ public class TileCoord {
 
 	public Vector2 coords;
 	
+	
+	public TileCoord() {}
+	
 	public TileCoord(int tileX, int tileY) {
 		coords = new Vector2(tileX, tileY);
 	}

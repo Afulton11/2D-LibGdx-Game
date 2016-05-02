@@ -37,6 +37,7 @@ public class MapLoader  extends AsynchronousAssetLoader<Map, MapLoader.MapParame
 		return map;
 	}
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Array<AssetDescriptor> getDependencies(String fileName,
 			FileHandle file, MapParameter mapParameter) {

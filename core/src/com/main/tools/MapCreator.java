@@ -6,18 +6,18 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveBy;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.parallel;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
-import javax.swing.GroupLayout.Alignment;
+import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
 
 import net.dermetfan.gdx.scenes.scene2d.ui.FileChooser;
-import net.dermetfan.gdx.scenes.scene2d.ui.ListFileChooser;
 import net.dermetfan.gdx.scenes.scene2d.ui.TreeFileChooser;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
@@ -28,11 +28,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 import com.badlogic.gdx.graphics.g3d.particles.ResourceData.AssetData;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -44,7 +44,14 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Json;
+import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.main.tiles.Map;
+import com.main.tiles.MapTerrainSheet;
+import com.main.tiles.Tile;
+import com.main.tiles.TileCoord;
+import com.main.tiles.VoidTile;
 import com.main.utils.Constants;
 
 public class MapCreator extends Game {
@@ -63,9 +70,7 @@ public class MapCreator extends Game {
 	private AssetManager assets;
 	private UniversalLoadingScreen loadingScreen;
 	private CreationScreen creationScreen;
-	
-	private Stage exitStage;
-		
+			
 	@Override
 	public void create() {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -84,8 +89,6 @@ public class MapCreator extends Game {
 				new AssetData<Texture>("maps/sprite_sheet.png", Texture.class));
 		
 		setScreen(loadingScreen);
-		exitStage = new Stage();
-		exitStage.setViewport(new StretchViewport(WIDTH, HEIGHT, cam));
 
 	}
 	
@@ -117,29 +120,31 @@ public class MapCreator extends Game {
 	
 	private class CreationScreen implements Screen {
 		
-		private static final String LOCATION_PROJECT = "A:/eclipse/workspace/LibGdxPlayArea/Project Ex/Core/";
+		private static final String LOCATION_PROJECT = "A:/eclipse/workspace/LibGdxPlayArea/Project Ex/Core/assets/maps/";
 		
+		private ShapeRenderer shapeRenderer;
 		private OrthographicCamera cam;
 		private Stage stage;
 		private Skin skin;
-		
-		private TextureRegion[][] terrain_sprites;
-		
+				
 		private TextButton openBtn, saveBtn, newBtn;
 		
 		private TreeFileChooser fileChooser;
-		private Array<FileHandle> selectedFiles;
 		
-		private Window fileWindow, saveWindow;
+		private Window fileWindow;
+		
+		private Tile[] tiles;
+		
+		private Map currentMap;
+		
 		
 		public CreationScreen() {
+			shapeRenderer = new ShapeRenderer();
 			cam = new OrthographicCamera();
 			cam.setToOrtho(false, WIDTH, HEIGHT);
 			
 			stage = new Stage();
 			stage.setViewport(new StretchViewport(WIDTH, HEIGHT, cam));
-			
-			selectedFiles = new Array<FileHandle>();
 		}
 		
 		
@@ -152,20 +157,11 @@ public class MapCreator extends Game {
 			skin = new Skin();
 			skin.addRegions(assets.get("ui/uiskin.atlas", TextureAtlas.class));
 			skin.load(Gdx.files.internal("ui/uiskin.json"));
-						
-			terrain_sprites = 
-					TextureRegion.split(assets.get("maps/sprite_sheet.png", Texture.class)
-					, Constants.TILE_SIZE, Constants.TILE_SIZE);
-			
-			
-			createSelectFileWindow();
-			createSaveFileWindow();
-			loadBtns();
-			
-		}
+							
+			MapTerrainSheet.init(assets.get("maps/sprite_sheet.png", Texture.class), Constants.TILE_SIZE);
 		
-		private void createSaveFileWindow() {
-			saveWindow = new Window("Set a Location to Save the File", skin);
+			createSelectFileWindow();
+			loadBtns();
 			
 		}
 		
@@ -175,17 +171,26 @@ public class MapCreator extends Game {
 				
 				@Override
 				public void choose(Array<FileHandle> files) {
-					selectedFiles.addAll(files);
+					System.out.println("ChooseMultiple");
+					
+					new Dialog("ERROR!", skin) {
+						{
+							text("You Can Only Choose 1 File to Load!");
+							button("Cancel");
+						}
+					}.show(stage);
+					
 				}
 				
 				@Override
 				public void choose(FileHandle file) {
-					selectedFiles.add(file);
+					System.out.println("File Chosen: " + file);
+					loadMap(file);
+					cancel();
 				}
 				
 				@Override
 				public void cancel() {
-					selectedFiles.clear();
 					fileWindow.setVisible(false);
 				}
 			});
@@ -194,12 +199,28 @@ public class MapCreator extends Game {
 			fileChooser.setVisible(true);
 			fileChooser.setShowHidden(false);
 			fileChooser.add(Gdx.files.absolute(LOCATION_PROJECT));
+			fileChooser.setFileFilter(new FileFilter() {
+				@Override
+				public boolean accept(File pathname) {
+					return pathname.getName().contains(".json");
+				}
+			});
 			
 			fileWindow.add(fileChooser);
 			fileWindow.setVisible(false);
 
 			
 			stage.addActor(fileWindow);
+		}
+		
+		
+		
+		private void loadMap(FileHandle handle) {
+			System.out.println("Loading Map...");
+			Json json = new Json();
+			currentMap = json.fromJson(Map.class, handle);
+			
+			System.out.println("Loaded Map!");
 		}
 		
 		private void loadBtns() {
@@ -224,8 +245,7 @@ public class MapCreator extends Game {
 			saveBtn.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					fileWindow.setPosition(WIDTH / 2 - fileChooser.getWidth() / 2, HEIGHT / 2 - fileChooser.getHeight() / 2);
-					fileWindow.setVisible(true);
+					new SaveDialog("Save...", skin).show(stage);
 
 				}
 			});
@@ -238,8 +258,33 @@ public class MapCreator extends Game {
 			newBtn.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					new SaveDialog("Save...", skin).show(stage);
-
+					new Dialog("New Map...", skin) {
+						
+						private TextArea widthArea, heightArea;
+						
+						{
+							text("What is the size of the map?");
+							widthArea = new TextArea("TileWidth", skin);
+							heightArea = new TextArea("TileHeight", skin);
+							row();
+							Table areaTable = new Table(skin);
+							areaTable.defaults().space(25);
+							areaTable.add(widthArea);
+							areaTable.add(heightArea);
+							add(areaTable).expand().fill();
+							row();
+							button("Create Map", true);
+							button("Cancel", false);
+						}
+						
+						@Override
+						protected void result(Object object) {
+							if((Boolean) object) {
+								createNewMap(Integer.parseInt(widthArea.getText()), 
+										Integer.parseInt(heightArea.getText()));
+							}
+						}
+					}.show(stage);
 				}
 			});
 			
@@ -247,16 +292,30 @@ public class MapCreator extends Game {
 			stage.addActor(openBtn);
 			stage.addActor(newBtn);
 		}
+		
+		private void createNewMap(int tileWidth, int tileHeight) {
+			this.currentMap = new Map(tileWidth, tileHeight);
+			this.tiles = new Tile[tileWidth * tileHeight];
+			
+			for(int y = 0; y < tileHeight; y++) {
+				for(int x = 0; x < tileWidth; x++) {
+					tiles[x + y * tileWidth] = new VoidTile(new TileCoord(x, y));
+				}
+			}
+		}
+		
 
 		@Override
 		public void render(float delta) {
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-						
+
+			shapeRenderer.setProjectionMatrix(cam.combined);
+			drawMapOutline();
 
 			batch.setProjectionMatrix(cam.combined);
 			batch.begin();
-			batch.draw(terrain_sprites[0][0], cam.viewportWidth / 2 - Constants.TILE_SIZE / 2, cam.viewportHeight / 2 - Constants.TILE_SIZE / 2);
+			drawMap();
 			batch.end();
 			
 			stage.act(delta);
@@ -267,6 +326,17 @@ public class MapCreator extends Game {
 			}
 
 		}
+		
+		
+		private void drawMapOutline() {
+			shapeRenderer.begin(ShapeType.Line);
+			
+			shapeRenderer.rect(0, 0, 100, 200); 
+		
+			shapeRenderer.end();
+		}
+		
+		private void drawMap() {}
 		
 		private void showExitDialog() {
 			new Dialog("Leave the Map Creator?", skin) {
@@ -280,13 +350,13 @@ public class MapCreator extends Game {
     				if((Boolean) object) {
     					Gdx.app.exit();
     				} else {
+    					
     					this.setVisible(false);
     				}
     			}
     			
     		}.show(stage);
 		}
-
 		@Override
 		public void resize(int width, int height) {
 			cam.setToOrtho(false, width, height);
@@ -310,12 +380,20 @@ public class MapCreator extends Game {
 
 		@Override
 		public void dispose() {
-			stage.dispose();
 			skin.dispose();
+			shapesRenderer.dispose();
 		}
 		
-		private void saveMap() {
-			
+		private void saveMap(String path) throws IOException {
+			System.out.println("Saving Map...");
+			currentMap.setTiles(tiles);
+//			File file = new File(path);
+//			if(!file.exists()) file.createNewFile();
+			Json json = new Json();
+			JsonWriter writer = new JsonWriter(Gdx.files.absolute(path).writer(false));
+			writer.write(json.prettyPrint(currentMap));
+			writer.close();
+			System.out.println("Successfully Saved Map!");
 		}
 		
 		private class SaveDialog extends Dialog {
@@ -327,9 +405,8 @@ public class MapCreator extends Game {
 			}
 			
 			{
-				
 				text("Where would you like to save your map?").setHeight(50);
-				area = new TextArea(LOCATION_PROJECT + "assets/maps/map.json", skin);
+				area = new TextArea(LOCATION_PROJECT + "map.json", skin);
 				area.setWidth(WIDTH / 2);
 				row();
 				Table areaTable = new Table(skin);
@@ -341,8 +418,7 @@ public class MapCreator extends Game {
 				
 				
 				button("Save", true);
-				button("Cancel", false);
-				
+				button("Cancel", false);		
 			}
 			
 			@Override
@@ -357,7 +433,11 @@ public class MapCreator extends Game {
 						@Override
 						protected void result(Object obj) {
 							if((Boolean) obj) {
-								saveMap();
+								try {
+									saveMap(area.getText());
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 							}
 						}
 						
