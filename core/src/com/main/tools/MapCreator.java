@@ -205,7 +205,9 @@ public class MapCreator extends Game {
 					return pathname.getName().contains(".json");
 				}
 			});
-		
+			
+			fileWindow.add(fileChooser);
+			fileWindow.setVisible(false);
 			
 			
 			stage.addActor(fileWindow);
