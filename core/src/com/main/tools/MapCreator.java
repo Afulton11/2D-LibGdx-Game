@@ -17,6 +17,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
@@ -34,6 +35,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.AssetData;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
@@ -47,8 +49,10 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
+import com.main.tiles.GrassTile;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
+import com.main.tiles.MouseTile;
 import com.main.tiles.Tile;
 import com.main.tiles.TileCoord;
 import com.main.tiles.VoidTile;
@@ -59,7 +63,6 @@ public class MapCreator extends Game {
 	private static final int WIDTH = 1280, HEIGHT = 720;
 	
 	private SpriteBatch batch;
-	private ShapeRenderer shapesRenderer;
 
 	private OrthographicCamera cam;
 	
@@ -78,7 +81,6 @@ public class MapCreator extends Game {
 		assets = new AssetManager(new InternalFileHandleResolver());
 		
 		batch = new SpriteBatch();
-		shapesRenderer = new ShapeRenderer();
 		cam = new OrthographicCamera();
 		cam.setToOrtho(false, WIDTH, HEIGHT);
 		
@@ -112,57 +114,60 @@ public class MapCreator extends Game {
 	@Override
 	public void dispose() {
 		batch.dispose();
-		shapesRenderer.dispose();
 		assets.dispose();
 		creationScreen.dispose();
 		loadingScreen.dispose();
 	}
 	
-	private class CreationScreen implements Screen {
+	private class CreationScreen extends InputMultiplexer implements Screen {
 		
 		private static final String LOCATION_PROJECT = "A:/eclipse/workspace/LibGdxPlayArea/Project Ex/Core/assets/maps/";
+		private static final float DEFAULT_ZOOM = 1.0f;
 		
 		private ShapeRenderer shapeRenderer;
-		private OrthographicCamera cam;
-		private Stage stage;
-		private Skin skin;
-				
+		private OrthographicCamera mapCam, hudCam;
+
+		private Stage hudStage, mapStage;
+		private Skin skin;			
 		private TextButton openBtn, saveBtn, newBtn;
 		
 		private TreeFileChooser fileChooser;
-		
 		private Window fileWindow;
 		
 		private Tile[] tiles;
-		
 		private Map currentMap;
-		
-		
+		private MouseTile mouseTile;
+				
 		public CreationScreen() {
 			shapeRenderer = new ShapeRenderer();
-			cam = new OrthographicCamera();
-			cam.setToOrtho(false, WIDTH, HEIGHT);
+			mapCam = new OrthographicCamera();
+			mapCam.setToOrtho(false, WIDTH, HEIGHT);
+			hudCam = new OrthographicCamera();
+			hudCam.setToOrtho(false, WIDTH, HEIGHT);
+						
+			hudStage = new Stage();
+			hudStage.setViewport(new StretchViewport(WIDTH, HEIGHT, hudCam));
+			mapStage = new Stage();
+			mapStage.setViewport(new StretchViewport(WIDTH, HEIGHT, mapCam));
 			
-			stage = new Stage();
-			stage.setViewport(new StretchViewport(WIDTH, HEIGHT, cam));
+			mouseTile = new MouseTile(new GrassTile());
 		}
 		
 		
 		@Override
 		public void show() {
 			System.out.println("CREATION");
-			stage.clear();
-			Gdx.input.setInputProcessor(stage);
+			hudStage.clear();
+			this.addProcessor(hudStage);
+			Gdx.input.setInputProcessor(this);
 			
 			skin = new Skin();
 			skin.addRegions(assets.get("ui/uiskin.atlas", TextureAtlas.class));
 			skin.load(Gdx.files.internal("ui/uiskin.json"));
 							
 			MapTerrainSheet.init(assets.get("maps/sprite_sheet.png", Texture.class), Constants.TILE_SIZE);
-		
 			createSelectFileWindow();
-			loadBtns();
-			
+			loadBtns();			
 		}
 		
 		private void createSelectFileWindow() {
@@ -178,7 +183,12 @@ public class MapCreator extends Game {
 							text("You Can Only Choose 1 File to Load!");
 							button("Cancel");
 						}
-					}.show(stage);
+						
+						@Override
+						public void result(Object object) {
+							this.remove();
+						}
+					}.show(hudStage);
 					
 				}
 				
@@ -210,7 +220,7 @@ public class MapCreator extends Game {
 			fileWindow.setVisible(false);
 			
 			
-			stage.addActor(fileWindow);
+			hudStage.addActor(fileWindow);
 		}
 		
 		
@@ -226,7 +236,7 @@ public class MapCreator extends Game {
 		private void loadBtns() {
 			openBtn = new TextButton("Open...", skin, "default");
 			openBtn.setSize(openBtn.getWidth() * 1.25f, openBtn.getHeight() * 1.1f);
-			openBtn.setPosition(5, stage.getHeight() - openBtn.getHeight() / 2 - 5);
+			openBtn.setPosition(5, hudStage.getHeight() - openBtn.getHeight() - 5);
 			openBtn.addAction(sequence(alpha(0), parallel(fadeIn(0.5f), moveBy(0, -20, .5f, Interpolation.pow5Out))));
 			
 			openBtn.addListener(new ClickListener() {
@@ -245,8 +255,7 @@ public class MapCreator extends Game {
 			saveBtn.addListener(new ClickListener() {
 				@Override
 				public void clicked(InputEvent event, float x, float y) {
-					new SaveDialog("Save...", skin).show(stage);
-
+					new SaveDialog("Save...", skin).show(hudStage);
 				}
 			});
 			
@@ -261,7 +270,6 @@ public class MapCreator extends Game {
 					new Dialog("New Map...", skin) {
 						
 						private TextArea widthArea, heightArea;
-						
 						{
 							text("What is the size of the map?");
 							widthArea = new TextArea("TileWidth", skin);
@@ -282,61 +290,101 @@ public class MapCreator extends Game {
 							if((Boolean) object) {
 								createNewMap(Integer.parseInt(widthArea.getText()), 
 										Integer.parseInt(heightArea.getText()));
+								this.setVisible(false);
+							} else {
+								this.setVisible(false);
 							}
 						}
-					}.show(stage);
+					}.show(hudStage);
 				}
 			});
 			
-			stage.addActor(saveBtn);
-			stage.addActor(openBtn);
-			stage.addActor(newBtn);
+			hudStage.addActor(saveBtn);
+			hudStage.addActor(openBtn);
+			hudStage.addActor(newBtn);
 		}
 		
 		private void createNewMap(int tileWidth, int tileHeight) {
 			this.currentMap = new Map(tileWidth, tileHeight);
 			this.tiles = new Tile[tileWidth * tileHeight];
 			
-			for(int y = 0; y < tileHeight; y++) {
-				for(int x = 0; x < tileWidth; x++) {
+			for(int y = 0; y < tileHeight; y++) 
+				for(int x = 0; x < tileWidth; x++) 
 					tiles[x + y * tileWidth] = new VoidTile(new TileCoord(x, y));
-				}
-			}
+			this.currentMap.setTiles(tiles);
 		}
 		
 
 		@Override
 		public void render(float delta) {
+			update(delta);
+			
 			Gdx.gl.glClearColor(0, 0, 0, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-			shapeRenderer.setProjectionMatrix(cam.combined);
+			
+			batch.setProjectionMatrix(mapCam.combined);
+			shapeRenderer.setProjectionMatrix(mapCam.combined);
 			drawMapOutline();
-
-			batch.setProjectionMatrix(cam.combined);
-			batch.begin();
-			drawMap();
-			batch.end();
-			
-			stage.act(delta);
-			stage.draw();
-			
-			if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
-				showExitDialog();
-			}
-
+			mouseTile.render(batch, mapCam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0)));
+			hudStage.draw();
 		}
 		
 		
 		private void drawMapOutline() {
 			shapeRenderer.begin(ShapeType.Line);
-			
-			shapeRenderer.rect(0, 0, 100, 200); 
-		
+			if(currentMap != null) {
+				shapeRenderer.setColor(1, 1, 1, 0.5f);
+				for(Tile t: currentMap.getTiles()) {
+					shapeRenderer.rect(t.getPixelCoords().x, t.getPixelCoords().y, Constants.TILE_SIZE, Constants.TILE_SIZE);
+					batch.begin();
+					t.render(batch);
+					batch.end();
+				}
+			}
 			shapeRenderer.end();
 		}
 		
-		private void drawMap() {}
+		private int moveSpeed = 200; //arrow key moveSpeed.
+		private void update(float delta) {
+			handleInput(delta);	
+			handleTileSelection(delta);
+		}
+		
+		private void handleInput(float delta) {
+			if(Gdx.input.isKeyJustPressed(Keys.ESCAPE)) {
+				showExitDialog();
+			}
+			
+			if(Gdx.input.isKeyPressed(Keys.RIGHT)) {
+				mapCam.translate(moveSpeed * delta, 0);
+				
+			} else if(Gdx.input.isKeyPressed(Keys.LEFT)) {
+				mapCam.translate(-moveSpeed * delta, 0);
+			}
+			
+			if(Gdx.input.isKeyPressed(Keys.UP)) {
+				mapCam.translate(0, moveSpeed * delta);
+				
+			} else if(Gdx.input.isKeyPressed(Keys.DOWN)) {
+				mapCam.translate(0, -moveSpeed * delta);
+			}
+			
+			//RIGHT CLICK TO PAN
+			if(Gdx.input.isButtonPressed(1)) {
+				Vector3 position = mapCam.unproject(new Vector3(Gdx.input.getX(), Gdx.input.getY(), 0));
+				mapCam.position.slerp(position, delta * 2f);
+			}
+			
+			//Reset Zoom
+			if(Gdx.input.isButtonPressed(2)) {
+				mapCam.zoom = DEFAULT_ZOOM;
+			}
+			mapCam.update();	
+		}
+		
+		private void handleTileSelection(float delta) {
+			
+		}
 		
 		private void showExitDialog() {
 			new Dialog("Leave the Map Creator?", skin) {
@@ -350,17 +398,16 @@ public class MapCreator extends Game {
     				if((Boolean) object) {
     					Gdx.app.exit();
     				} else {
-    					
     					this.setVisible(false);
     				}
     			}
     			
-    		}.show(stage);
+    		}.show(hudStage);
 		}
 		@Override
 		public void resize(int width, int height) {
-			cam.setToOrtho(false, width, height);
-			stage.getViewport().update(width, height);
+			mapCam.setToOrtho(false, width, height);
+			hudStage.getViewport().update(width, height);
 		}
 
 		@Override
@@ -381,19 +428,32 @@ public class MapCreator extends Game {
 		@Override
 		public void dispose() {
 			skin.dispose();
-			shapesRenderer.dispose();
+			shapeRenderer.dispose();
+			hudStage.dispose();
+			mapStage.dispose();
 		}
 		
 		private void saveMap(String path) throws IOException {
 			System.out.println("Saving Map...");
 			currentMap.setTiles(tiles);
-//			File file = new File(path);
-//			if(!file.exists()) file.createNewFile();
-			Json json = new Json();
+			
+			Json json = new Json();			
 			JsonWriter writer = new JsonWriter(Gdx.files.absolute(path).writer(false));
 			writer.write(json.prettyPrint(currentMap));
 			writer.close();
 			System.out.println("Successfully Saved Map!");
+		}
+		
+		@Override
+		public boolean scrolled(int amount) {
+			if(mapCam.zoom == 0.2f && amount > 0) {
+				mapCam.zoom += amount * 0.1f;
+			}
+			if(mapCam.zoom > 0.2f) 
+				mapCam.zoom += amount * 0.1f;
+			else 
+				mapCam.zoom = 0.2f;
+			return false;
 		}
 		
 		private class SaveDialog extends Dialog {
@@ -439,6 +499,7 @@ public class MapCreator extends Game {
 									e.printStackTrace();
 								}
 							}
+							remove();
 						}
 						
 					}.show(getStage());

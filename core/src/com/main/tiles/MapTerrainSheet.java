@@ -16,7 +16,7 @@ public final class MapTerrainSheet {
 		terrainSheet = TextureRegion.split(sheetTexture, splitSize, splitSize);
 	}
 	
-	public static Texture getTextureAt(int x, int y) {
-		return terrainSheet[x][y].getTexture();
+	public static TextureRegion getTextureRegion(int x, int y) {
+		return terrainSheet[y][x];
 	}
 }

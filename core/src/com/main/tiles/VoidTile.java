@@ -3,13 +3,19 @@ package com.main.tiles;
 
 public class VoidTile extends Tile {
 	
+	private static final int TEX_X = 0, TEX_Y = 0;
+	
 	/**
-	 * No need to use this constructor for a void tile. Used for json loading.
+	 * Creates a blank voidTile, only setting the tile's id and textureX.
 	 */
-	public VoidTile() {}
+	public VoidTile() {
+		this.textureX = TEX_X;
+		this.textureY = TEX_Y;
+		this.id = Tile.Type.VOID.getId();
+	}
 	
 	public VoidTile(TileCoord coord) {
-		this.setUpTile(0, 0, Tile.Type.VOID.getId(), coord);
+		this.setUpTile(TEX_X, TEX_Y, Tile.Type.VOID.getId(), coord);
 	}
 	
 	public boolean isSolid() {

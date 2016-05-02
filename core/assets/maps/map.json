@@ -1,6 +1,6 @@
 {
 tileWidth: 32
-tileHeight: 25
+tileHeight: 32
 tiles: [
 	{
 		class: com.main.tiles.VoidTile
@@ -7141,6 +7141,2015 @@ tiles: [
 			coords: {
 				x: 31
 				y: 24
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 25
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 26
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 27
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 28
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 29
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 30
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 2
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 3
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 4
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 5
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 6
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 7
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 8
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 9
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 10
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 11
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 12
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 13
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 14
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 15
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 16
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 17
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 18
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 19
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 20
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 21
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 22
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 23
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 24
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 25
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 26
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 27
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 28
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 29
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 30
+				y: 31
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 31
+				y: 31
 			}
 		}
 	}

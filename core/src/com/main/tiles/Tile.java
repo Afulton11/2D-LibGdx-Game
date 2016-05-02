@@ -1,6 +1,7 @@
 package com.main.tiles;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Tile {
@@ -40,7 +41,7 @@ public class Tile {
 	}
 	
 	public void render(SpriteBatch batch) {
-		batch.draw(MapTerrainSheet.getTextureAt(textureX, textureY), position.getPixelCoords().x, position.getPixelCoords().y);
+		batch.draw(MapTerrainSheet.getTextureRegion(textureX, textureY), position.getPixelCoords().x, position.getPixelCoords().y);
 	}
 	
 	public boolean isSolid() {
@@ -58,5 +59,9 @@ public class Tile {
 	
 	public Vector2 getPixelCoords() {
 		return position.getPixelCoords();
+	}
+	
+	public TextureRegion getTextureRegion() {
+		return MapTerrainSheet.getTextureRegion(textureX, textureY);
 	}
 }
