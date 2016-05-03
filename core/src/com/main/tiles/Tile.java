@@ -7,16 +7,23 @@ import com.badlogic.gdx.math.Vector2;
 public class Tile {
 	
 	public static enum Type {
-		VOID(0), GRASS(1), STONE(2), WOOD_PLANK(3);
+		VOID(0, VoidTile.class), GRASS(1, GrassTile.class);
 		
 		private final int id;
+		private final Class<? extends Tile> tileClass;
 		
-		Type(final int id) {
+		Type(final int id, final Class<? extends Tile> tileClass) {
 			this.id = id;
+			this.tileClass = tileClass;
 		}
 		
 		int getId() {
 			return id;
+		}
+		
+		Class<? extends Tile> getTileClass() {
+			return this.tileClass;
+			
 		}
 	}
 	
@@ -53,6 +60,10 @@ public class Tile {
 		return id;
 	}
 
+	public void setTileCoordinates(TileCoord coord) {
+		this.position = coord;
+	}
+	
 	public TileCoord getTileCoords() {
 		return position;
 	}
@@ -63,5 +74,20 @@ public class Tile {
 	
 	public TextureRegion getTextureRegion() {
 		return MapTerrainSheet.getTextureRegion(textureX, textureY);
+	}
+	
+	public Tile copy() {
+		Tile copy = new Tile();
+		copy.setUpTile(textureX, textureY, id, position);
+		return copy;
+	}
+	
+	public Class<? extends Tile> getTileClass() {
+		for(int i = 0; i < Type.values().length; i++) {
+			if(Type.values()[i].getId() == id) {
+				return Type.values()[i].getTileClass();
+			}
+		}
+		return null;
 	}
 }

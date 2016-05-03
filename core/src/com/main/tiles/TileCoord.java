@@ -22,6 +22,10 @@ public class TileCoord {
 		coords = new Vector2(tileX, tileY);
 	}
 	
+	public TileCoord(Vector2 vec2) {
+		coords = vec2;
+	}
+	
 	public void addCoords(TileCoord coords) {
 		this.coords = new Vector2(this.coords.x + coords.coords.x, this.coords.y + coords.coords.x);
 	}

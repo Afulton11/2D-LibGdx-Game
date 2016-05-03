@@ -16,6 +16,7 @@ import net.dermetfan.gdx.scenes.scene2d.ui.TreeFileChooser;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
@@ -48,6 +49,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonWriter;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.main.tiles.GrassTile;
 import com.main.tiles.Map;
@@ -135,6 +137,7 @@ public class MapCreator extends Game {
 		private Window fileWindow;
 		
 		private Tile[] tiles;
+		private Array<Tile> placedTiles;
 		private Map currentMap;
 		private MouseTile mouseTile;
 				
@@ -151,6 +154,7 @@ public class MapCreator extends Game {
 			mapStage.setViewport(new StretchViewport(WIDTH, HEIGHT, mapCam));
 			
 			mouseTile = new MouseTile(new GrassTile());
+			placedTiles = new Array<Tile>();
 		}
 		
 		
@@ -319,7 +323,7 @@ public class MapCreator extends Game {
 		public void render(float delta) {
 			update(delta);
 			
-			Gdx.gl.glClearColor(0, 0, 0, 1);
+			Gdx.gl.glClearColor(0.25f, 0.25f, 0.25f, 1);
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 			
 			batch.setProjectionMatrix(mapCam.combined);
@@ -347,6 +351,7 @@ public class MapCreator extends Game {
 		private int moveSpeed = 200; //arrow key moveSpeed.
 		private void update(float delta) {
 			handleInput(delta);	
+			handleTilePlacement(delta);
 			handleTileSelection(delta);
 		}
 		
@@ -380,6 +385,34 @@ public class MapCreator extends Game {
 				mapCam.zoom = DEFAULT_ZOOM;
 			}
 			mapCam.update();	
+		}
+		
+		private boolean touchReleased = true;
+		private long lastUndoTime = 0;
+		private void handleTilePlacement(float delta) {
+			if(touchReleased && Gdx.input.isButtonPressed(0)) {
+				touchReleased = false;
+				if(currentMap != null) {
+					int index = (int)mouseTile.getTileCoordinates().x + (int)mouseTile.getTileCoordinates().y * currentMap.getTileWidth();
+					if(index > -1 && index < currentMap.getTileWidth() * currentMap.getTileHeight()) {
+						Tile t = mouseTile.tile.copy();
+						t.setTileCoordinates(new TileCoord(mouseTile.getTileCoordinates()));
+						System.out.println("Tile x: " + t.getTileCoords().coords.x + " Tile Y: " + t.getTileCoords().coords.y);
+						currentMap.getTiles().set(index, t);
+						placedTiles.add(t);
+					}
+				}
+			} else if(!Gdx.input.isButtonPressed(0)){
+				touchReleased = true;
+			}
+			System.out.println();
+			if(placedTiles.size > 0 && TimeUtils.millis() - lastUndoTime > 100 &&  
+					Gdx.input.isKeyPressed(Keys.Z) && Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)) {
+				System.out.println("Undo");
+				lastUndoTime = TimeUtils.millis();
+				currentMap.removeTile(this.placedTiles.get(placedTiles.size - 1));
+				placedTiles.removeIndex(placedTiles.size - 1);
+			}
 		}
 		
 		private void handleTileSelection(float delta) {
@@ -435,7 +468,6 @@ public class MapCreator extends Game {
 		
 		private void saveMap(String path) throws IOException {
 			System.out.println("Saving Map...");
-			currentMap.setTiles(tiles);
 			
 			Json json = new Json();			
 			JsonWriter writer = new JsonWriter(Gdx.files.absolute(path).writer(false));
@@ -483,7 +515,9 @@ public class MapCreator extends Game {
 			
 			@Override
 			protected void result(Object object) {
+				remove();
 				if((Boolean) object) {
+					final Dialog parent = this;
 					new Dialog("Confirm Save", skin) {
 						{
 							text("Save Map to: " + area.getText());
@@ -498,11 +532,13 @@ public class MapCreator extends Game {
 								} catch (IOException e) {
 									e.printStackTrace();
 								}
-							}
+							} else 
+								parent.show(hudStage);
+								
 							remove();
 						}
 						
-					}.show(getStage());
+					}.show(hudStage);
 				}
 			}	
 		}

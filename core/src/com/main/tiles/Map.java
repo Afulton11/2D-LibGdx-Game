@@ -52,8 +52,19 @@ public class Map{
 		this.tiles.addAll(tiles);
 	}
 	
+	public void removeTile(Tile tileToRemove) {
+		for(int i = 0; i < tiles.size; i++) {
+			Tile t = tiles.get(i);
+			if(t.position.coords.equals(tileToRemove.position.coords)) {
+				tiles.set(i, new VoidTile(t.position));
+			}
+		}
+	}
+	
 	public Tile getTileAt(TileCoord tileCoord) {
 		return tiles.get((int) (tileCoord.coords.x * tileCoord.coords.y * tileWidth));
 	}
+	
+	
 
 }
