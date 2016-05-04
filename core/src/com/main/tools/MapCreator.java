@@ -55,6 +55,7 @@ import com.main.tiles.GrassTile;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
 import com.main.tiles.MouseTile;
+import com.main.tiles.StoneTile;
 import com.main.tiles.Tile;
 import com.main.tiles.TileCoord;
 import com.main.tiles.VoidTile;
@@ -139,7 +140,10 @@ public class MapCreator extends Game {
 		private Tile[] tiles;
 		private Array<Tile> placedTiles;
 		private Map currentMap;
+		
 		private MouseTile mouseTile;
+		private Tile[] mouseTiles; 
+		private int currentMouseTileIndex;
 				
 		public CreationScreen() {
 			shapeRenderer = new ShapeRenderer();
@@ -154,6 +158,8 @@ public class MapCreator extends Game {
 			mapStage.setViewport(new StretchViewport(WIDTH, HEIGHT, mapCam));
 			
 			mouseTile = new MouseTile(new GrassTile());
+			currentMouseTileIndex = 1;
+			mouseTiles = new Tile[]{new VoidTile(), new GrassTile(), new StoneTile()};
 			placedTiles = new Array<Tile>();
 		}
 		
@@ -414,9 +420,15 @@ public class MapCreator extends Game {
 				placedTiles.removeIndex(placedTiles.size - 1);
 			}
 		}
-		
+		//Tile Selection is used by pressing the plus key and Enter key on the numpad. Enter goes down in the tile list, while the plus goes up in the tile list.
 		private void handleTileSelection(float delta) {
-			
+			if(Gdx.input.isKeyJustPressed(Keys.PLUS) && currentMouseTileIndex < mouseTiles.length - 1) {
+				currentMouseTileIndex++;
+				mouseTile.tile = mouseTiles[currentMouseTileIndex];
+			} else if(Gdx.input.isKeyJustPressed(Keys.ENTER) && currentMouseTileIndex > 0) {
+				currentMouseTileIndex--;
+				mouseTile.tile = mouseTiles[currentMouseTileIndex];
+			}
 		}
 		
 		private void showExitDialog() {

@@ -7,23 +7,16 @@ import com.badlogic.gdx.math.Vector2;
 public class Tile {
 	
 	public static enum Type {
-		VOID(0, VoidTile.class), GRASS(1, GrassTile.class);
+		VOID(0), GRASS(1), STONE(2);
 		
 		private final int id;
-		private final Class<? extends Tile> tileClass;
 		
-		Type(final int id, final Class<? extends Tile> tileClass) {
+		Type(final int id) {
 			this.id = id;
-			this.tileClass = tileClass;
 		}
 		
 		int getId() {
 			return id;
-		}
-		
-		Class<? extends Tile> getTileClass() {
-			return this.tileClass;
-			
 		}
 	}
 	
@@ -80,14 +73,5 @@ public class Tile {
 		Tile copy = new Tile();
 		copy.setUpTile(textureX, textureY, id, position);
 		return copy;
-	}
-	
-	public Class<? extends Tile> getTileClass() {
-		for(int i = 0; i < Type.values().length; i++) {
-			if(Type.values()[i].getId() == id) {
-				return Type.values()[i].getTileClass();
-			}
-		}
-		return null;
 	}
 }
