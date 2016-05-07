@@ -21,6 +21,9 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.main.Main;
 import com.main.entities.Player;
+import com.main.tiles.Map;
+import com.main.tiles.MapTerrainSheet;
+import com.main.utils.Constants;
 
 
 public class PlayScreen implements Screen {
@@ -40,9 +43,7 @@ public class PlayScreen implements Screen {
 	private Player player;
 	
 	private Texture hudTex;
-	
-	private TiledMap tiledMap;
-	private TiledMapRenderer mapRenderer;
+	private Map map;
 	
 	public PlayScreen(final Main game) {
 		this.game = game;
@@ -59,8 +60,8 @@ public class PlayScreen implements Screen {
 	@Override
 	public void show() {
 
-		tiledMap = game.assets.get("maps/map1.tmx", TiledMap.class);
-		mapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
+		map = game.assets.get("maps/map.json", Map.class);
+		MapTerrainSheet.init(game.assets.get("maps/sprite_sheet.png", Texture.class), Constants.TILE_SIZE);
 		lastUpdateTime = 0;
 		hudTex = game.assets.get("imgs/hud.png", Texture.class);
 		player = new Player(createBox(Main.V_WIDTH / 2, Main.V_HEIGHT / 2, 16, 16, BodyDef.BodyType.DynamicBody), game.assets);
@@ -77,10 +78,9 @@ public class PlayScreen implements Screen {
 		Gdx.gl.glClearColor(1, 1, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		mapRenderer.setView(camera);
-		mapRenderer.render();
-		
 		game.batch.setProjectionMatrix(camera.combined);
+		map.render(game.batch);
+		
 		player.render(game.batch);
 		if(DEBUG) 
 			b2dr.render(world, camera.combined.scl(PPM));

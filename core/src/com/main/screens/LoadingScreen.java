@@ -15,6 +15,8 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.main.Main;
+import com.main.tiles.Map;
+import com.main.tiles.MapLoader;
 
 public class LoadingScreen implements Screen {
 
@@ -53,9 +55,9 @@ public class LoadingScreen implements Screen {
 		game.assets.load("ui/uiskin.atlas", TextureAtlas.class);
 		game.assets.load("imgs/player_sheet.png", Texture.class);
 		game.assets.load("imgs/hud.png", Texture.class);
-		game.assets.setLoader(TiledMap.class, new TmxMapLoader(new InternalFileHandleResolver()));
-		game.assets.load("maps/map1.tmx", TiledMap.class);
-		game.assets.load("maps/basic_level.png", Texture.class);
+		game.assets.setLoader(Map.class, new MapLoader(new InternalFileHandleResolver()));
+		game.assets.load("maps/map.json", Map.class);
+		game.assets.load("maps/sprite_sheet.png", Texture.class);
 		game.assets.finishLoading();
 	}
 

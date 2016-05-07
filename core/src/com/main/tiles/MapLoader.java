@@ -8,7 +8,6 @@ import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
-import com.badlogic.gdx.utils.JsonWriter.OutputType;
 
 public class MapLoader  extends AsynchronousAssetLoader<Map, MapLoader.MapParameter>{
 	
@@ -24,8 +23,8 @@ public class MapLoader  extends AsynchronousAssetLoader<Map, MapLoader.MapParame
 			FileHandle file, MapParameter mapParameter) {
 		map = null;
 		Json json = new Json();
-		json.setOutputType(OutputType.minimal);
 		map = json.fromJson(Map.class, file);
+		System.out.println("Map Loaded!");
 		
 	}
 
