@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class FitnessCalc {
 	 static byte[] solution = new byte[64];
-	 public static Vector2 goalPoint = new Vector2(Evoloution.WIDTH / 2, Evoloution.HEIGHT / 2);
+	 public static Vector2 goalPoint = new Vector2(0, 0);
 
 	    /* Public methods */
 	    // Set a candidate solution as a byte array

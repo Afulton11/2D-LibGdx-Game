@@ -13,4 +13,8 @@ public class StoneTile extends Tile{
 	public StoneTile(TileCoord coords) {
 		this.setUpTile(TEX_X, TEX_Y, Tile.Type.STONE.getId(), coords);
 	}
+	
+//	public boolean isSolid(){
+//		return true;
+//	}
 }

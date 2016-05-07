@@ -11,7 +11,7 @@ public class Individual {
     static int defaultGeneLength = 64;
     private Color c;
     public int geneIndex;
-    public int x = 150;
+    public float x = 150;
     private byte[] genes = new byte[defaultGeneLength];
     // Cache
     private int fitness = 0;
@@ -27,7 +27,7 @@ public class Individual {
         }
     }
     
-    public int y = Evoloution.WIDTH / 2;
+    public float y = Evoloution.WIDTH / 2;
     public void render(ShapeRenderer shape) {
     	if(c == null) c = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
     	shape.setColor(c);
@@ -38,8 +38,8 @@ public class Individual {
     	move(delta);
     }
     
-    private int speed = 100;
-    private float damper = 0.05f;
+    private int speed = 2;
+    private float damper = 0.5f;
     private void move(float delta) {
     	if(geneIndex < genes.length) {
     		time += delta;

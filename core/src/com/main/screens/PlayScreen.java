@@ -7,10 +7,6 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -23,6 +19,7 @@ import com.main.Main;
 import com.main.entities.Player;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
+import com.main.tiles.Tile;
 import com.main.utils.Constants;
 
 
@@ -39,7 +36,7 @@ public class PlayScreen implements Screen {
 	private Box2DDebugRenderer b2dr;
 	
 	//Box2D world that handles all box2D physics.
-	private World world;
+	private static World world;
 	private Player player;
 	
 	private Texture hudTex;
@@ -65,7 +62,15 @@ public class PlayScreen implements Screen {
 		lastUpdateTime = 0;
 		hudTex = game.assets.get("imgs/hud.png", Texture.class);
 		player = new Player(createBox(Main.V_WIDTH / 2, Main.V_HEIGHT / 2, 16, 16, BodyDef.BodyType.DynamicBody), game.assets);
-		createBox(Main.V_WIDTH / 2, Main.V_HEIGHT / 2 - 64, 128, 32, BodyDef.BodyType.StaticBody);
+		
+		for(Tile t : map.getTiles()) {
+			if(t.isSolid()) {
+				PlayScreen.createBox((int)(t.getPixelCoords().x + Constants.TILE_SIZE / 2), 
+						(int)(t.getPixelCoords().y + Constants.TILE_SIZE / 2), 
+						Constants.TILE_SIZE, Constants.TILE_SIZE, 
+						BodyDef.BodyType.StaticBody);
+			}
+		}
 	}
 
 	@Override
@@ -84,9 +89,7 @@ public class PlayScreen implements Screen {
 		player.render(game.batch);
 		if(DEBUG) 
 			b2dr.render(world, camera.combined.scl(PPM));
-		
-		
-		
+
 		game.batch.setProjectionMatrix(hudCam.combined);
 		game.batch.begin();
 		game.batch.draw(hudTex, 0, 0);
@@ -139,7 +142,7 @@ public class PlayScreen implements Screen {
 		
 	}
 	
-	public Body createBox(int x, int y, int width, int height, BodyDef.BodyType bodyType) {
+	public static Body createBox(int x, int y, int width, int height, BodyDef.BodyType bodyType) {
 		Body pBody;
 		BodyDef def = new BodyDef();
 		def.type = bodyType;

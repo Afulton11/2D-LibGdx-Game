@@ -3,14 +3,14 @@ tileWidth: 10
 tileHeight: 10
 tiles: [
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {}
 		}
 	}
 	{
-		class: com.main.tiles.VoidTile
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 1
@@ -18,8 +18,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 2
@@ -27,6 +26,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 3
@@ -34,8 +35,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -51,8 +52,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 6
@@ -68,8 +68,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 8
@@ -93,8 +92,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 1
@@ -122,6 +120,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -130,8 +130,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 5
@@ -149,8 +148,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 7
@@ -159,6 +157,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 8
@@ -167,8 +166,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 9
@@ -177,8 +175,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				y: 2
@@ -195,8 +193,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 2
@@ -205,7 +202,8 @@ tiles: [
 		}
 	}
 	{
-		class: com.main.tiles.VoidTile
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 3
@@ -214,8 +212,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -233,8 +231,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 6
@@ -252,8 +249,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 8
@@ -308,7 +304,8 @@ tiles: [
 		}
 	}
 	{
-		class: com.main.tiles.VoidTile
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -317,8 +314,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 5
@@ -327,6 +323,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 6
@@ -335,8 +332,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 7
@@ -354,8 +350,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 9
@@ -364,8 +359,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				y: 4
@@ -382,8 +377,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 2
@@ -392,7 +386,8 @@ tiles: [
 		}
 	}
 	{
-		class: com.main.tiles.VoidTile
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 3
@@ -401,8 +396,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -411,6 +406,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 5
@@ -419,8 +416,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 6
@@ -429,7 +426,8 @@ tiles: [
 		}
 	}
 	{
-		class: com.main.tiles.VoidTile
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 7
@@ -438,8 +436,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 8
@@ -448,7 +446,8 @@ tiles: [
 		}
 	}
 	{
-		class: com.main.tiles.VoidTile
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 9
@@ -457,6 +456,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				y: 5
@@ -474,6 +475,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 2
@@ -492,6 +494,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -510,6 +514,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 6
@@ -528,116 +534,29 @@ tiles: [
 		}
 	}
 	{
-		position: {
-			coords: {
-				x: 8
-				y: 5
-			}
-		}
-	}
-	{
 		id: 1
 		textureY: 1
 		position: {
 			coords: {
+				x: 8
+				y: 5
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
 				x: 9
 				y: 5
 			}
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				y: 6
-			}
-		}
-	}
-	{
-		position: {
-			coords: {
-				x: 1
-				y: 6
-			}
-		}
-	}
-	{
-		id: 2
-		textureX: 1
-		position: {
-			coords: {
-				x: 2
-				y: 6
-			}
-		}
-	}
-	{
-		position: {
-			coords: {
-				x: 3
-				y: 6
-			}
-		}
-	}
-	{
-		id: 2
-		textureX: 1
-		position: {
-			coords: {
-				x: 4
-				y: 6
-			}
-		}
-	}
-	{
-		position: {
-			coords: {
-				x: 5
-				y: 6
-			}
-		}
-	}
-	{
-		id: 2
-		textureX: 1
-		position: {
-			coords: {
-				x: 6
-				y: 6
-			}
-		}
-	}
-	{
-		position: {
-			coords: {
-				x: 7
-				y: 6
-			}
-		}
-	}
-	{
-		id: 2
-		textureX: 1
-		position: {
-			coords: {
-				x: 8
-				y: 6
-			}
-		}
-	}
-	{
-		position: {
-			coords: {
-				x: 9
-				y: 6
-			}
-		}
-	}
-	{
-		position: {
-			coords: {
-				y: 7
 			}
 		}
 	}
@@ -647,11 +566,109 @@ tiles: [
 		position: {
 			coords: {
 				x: 1
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 2
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 3
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 4
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 5
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 6
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 7
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 8
+				y: 6
+			}
+		}
+	}
+	{
+		id: 1
+		textureY: 1
+		position: {
+			coords: {
+				x: 9
+				y: 6
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
 				y: 7
 			}
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
+		position: {
+			coords: {
+				x: 1
+				y: 7
+			}
+		}
+	}
+	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 2
@@ -670,6 +687,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -678,8 +697,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 5
@@ -688,6 +706,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 6
@@ -696,8 +715,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 7
@@ -706,6 +724,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 8
@@ -714,8 +733,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 9
@@ -724,8 +742,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				y: 8
@@ -742,8 +759,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 2
@@ -752,6 +768,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 3
@@ -760,8 +778,8 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -770,6 +788,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 5
@@ -778,8 +797,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 6
@@ -788,6 +806,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 7
@@ -796,8 +815,7 @@ tiles: [
 		}
 	}
 	{
-		id: 2
-		textureX: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 8
@@ -815,6 +833,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				y: 9
@@ -822,8 +841,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 1
@@ -851,6 +869,8 @@ tiles: [
 		}
 	}
 	{
+		id: 1
+		textureY: 1
 		position: {
 			coords: {
 				x: 4
@@ -859,8 +879,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 5
@@ -878,8 +897,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 7
@@ -888,6 +906,7 @@ tiles: [
 		}
 	}
 	{
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 8
@@ -896,8 +915,7 @@ tiles: [
 		}
 	}
 	{
-		id: 1
-		textureY: 1
+		class: com.main.tiles.VoidTile
 		position: {
 			coords: {
 				x: 9
