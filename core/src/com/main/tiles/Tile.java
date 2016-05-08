@@ -68,6 +68,10 @@ public class Tile {
 		return position.getPixelCoords();
 	}
 	
+	public Vector2 getMiddlePixelCoords() {
+		return new Vector2(position.getPixelCoords().x + Constants.TILE_SIZE / 2, position.getPixelCoords().y + Constants.TILE_SIZE / 2);
+	}
+	
 	public TextureRegion getTextureRegion() {
 		return MapTerrainSheet.getTextureRegion(textureX, textureY);
 	}

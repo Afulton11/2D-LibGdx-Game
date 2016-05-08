@@ -4,6 +4,7 @@ import static com.main.utils.Constants.PPM;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.main.Main;
+import com.main.entities.DummyMob;
 import com.main.entities.Player;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
@@ -38,6 +40,7 @@ public class PlayScreen implements Screen {
 	//Box2D world that handles all box2D physics.
 	private static World world;
 	private Player player;
+	private DummyMob mob;
 	
 	private Texture hudTex;
 	private Map map;
@@ -62,6 +65,7 @@ public class PlayScreen implements Screen {
 		lastUpdateTime = 0;
 		hudTex = game.assets.get("imgs/hud.png", Texture.class);
 		player = new Player(createBox(Main.V_WIDTH / 2, Main.V_HEIGHT / 2, 16, 16, BodyDef.BodyType.DynamicBody), game.assets);
+		mob = new DummyMob(createBox(15, 15, 16, 16, BodyDef.BodyType.DynamicBody), game.assets);
 		
 		for(Tile t : map.getTiles()) {
 			if(t.isSolid()) {
@@ -86,6 +90,7 @@ public class PlayScreen implements Screen {
 		game.batch.setProjectionMatrix(camera.combined);
 		map.render(game.batch);
 		
+		mob.render(game.batch);
 		player.render(game.batch);
 		if(DEBUG) 
 			b2dr.render(world, camera.combined.scl(PPM));
@@ -100,6 +105,10 @@ public class PlayScreen implements Screen {
 	private void update(float delta) {
 		world.step(1f / Main.TARGET_UPS, 6, 2);
 		player.update(delta);
+		mob.update(delta);
+		if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
+			mob.setTarget(player.getWorldPos());
+		}
 		cameraUpdate(delta);
 	}
 	

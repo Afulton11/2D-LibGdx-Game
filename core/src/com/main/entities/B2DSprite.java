@@ -4,6 +4,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import com.main.tiles.Map;
+import com.main.tiles.Tile;
+import com.main.tiles.TileCoord;
 import com.main.utils.Animation;
 import com.main.utils.Constants;
 
@@ -39,4 +42,26 @@ public class B2DSprite {
 	public Vector2 getPosition() { return body.getPosition(); }
 	public float getWidth() { return width; }
 	public float getHeight() { return height; }
+	
+	public Vector2 getWorldPos() {
+		return new Vector2(getBodyPositionX(), getBodyPositionY());
+	}
+	
+	protected void addBodyPosition(float xAmt, float yAmt) {
+		body.getPosition().x += xAmt / Constants.PPM;
+		body.getPosition().y += xAmt / Constants.PPM;
+	}
+	
+	protected void setBodyPosition(float x, float y) {
+		body.getPosition().x = x / Constants.PPM + width / 2 + offsetX;
+		body.getPosition().y = y / Constants.PPM + width / 2 + offsetX;
+	}
+	
+	protected float getBodyPositionX() {
+		return body.getPosition().x * Constants.PPM - width / 2 + offsetX;
+	}
+	
+	protected float getBodyPositionY() {
+		return body.getPosition().y * Constants.PPM - width / 2 + offsetX;
+	}
 }

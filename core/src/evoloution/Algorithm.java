@@ -1,5 +1,10 @@
 package evoloution;
 
+import java.util.Iterator;
+
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.utils.Array;
+
 public class Algorithm {
 	/* GA parameters */
     private static final double uniformRate = 0.5;
@@ -11,6 +16,19 @@ public class Algorithm {
     
     // Evolve a population
     public static Population evolvePopulation(Population pop) {
+		Evoloution.world.clearForces();
+		if(!Evoloution.world.isLocked()) {
+    	Array<Body> bodies = new Array<Body>();
+    	Evoloution.world.getBodies(bodies);
+    	Iterator<Body> i = bodies.iterator();
+    	   while(i.hasNext()){
+    	      Body b = i.next();
+    	      if(b != Evoloution.platform && b != Evoloution.wall && b!= Evoloution.wall2
+    	    		  && b != Evoloution.topWall && b!= Evoloution.bottomWall && b != Evoloution.rightWall && b != Evoloution.leftWall)
+    	    	  Evoloution.world.destroyBody(b);
+    	   }
+    	i.remove();
+		}
         Population newPopulation = new Population(pop.size(), false);
 
         // Keep our best individual
@@ -63,8 +81,7 @@ public class Algorithm {
         for (int i = 0; i < indiv.size(); i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                byte gene = (byte) Math.round(Math.random());
-                indiv.setGene(i, gene);
+                indiv.setGene(i, new Gene((float) (Math.random() * 500f), (int)(Math.random() * 4), (float) (Math.random() * 2)));
             }
         }
     }

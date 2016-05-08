@@ -4,67 +4,91 @@ import java.util.Random;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.main.utils.Constants;
 
 public class Individual {
 
     static int defaultGeneLength = 64;
     private Color c;
     public int geneIndex;
-    public float x = 150;
-    private byte[] genes = new byte[defaultGeneLength];
+    private float x = 150;
+    private float y = Evoloution.WIDTH / 2;
+    private Gene[] genes = new Gene[defaultGeneLength];
     // Cache
     private int fitness = 0;
     private static Random rand = new Random(2134);
     private float time = 0;
+    public Body body;
+    
+    private static final int WIDTH = 8, HEIGHT = 8;
+    
+    public Individual() {
+    	body = Evoloution.createMonsterBox((int)x, (int)y, WIDTH, HEIGHT, BodyType.DynamicBody);
+    	
+    	c = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
+    }
     
     // Create a random individual
     public void generateIndividual() {
+    	body = Evoloution.createMonsterBox((int)x, (int)y, WIDTH, HEIGHT, BodyType.DynamicBody);
     	c = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
         for (int i = 0; i < size(); i++) {
-            byte gene = (byte) Math.round(Math.random());
-            genes[i] = gene;
+            genes[i] = new Gene((float) (Math.random() * 500), (int)(Math.random() * 4), (float) (Math.random() * 2));
         }
     }
     
-    public float y = Evoloution.WIDTH / 2;
     public void render(ShapeRenderer shape) {
     	if(c == null) c = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
     	shape.setColor(c);
-    	shape.rect(x, y, 8, 8);
+    	shape.rect(body.getPosition().x - WIDTH / Constants.PPM / 2, body.getPosition().y - HEIGHT / Constants.PPM / 2, WIDTH / Constants.PPM, HEIGHT /  Constants.PPM);
     }
     
     public void update(float delta) {
     	move(delta);
     }
     
-    private int speed = 2;
-    private float damper = 0.5f;
+    private float timeToWait = 0;
+    private float waitTimer = 0;
+    float velX = 0, velY = 0;
     private void move(float delta) {
     	if(geneIndex < genes.length) {
-    		time += delta;
-    		if(genes[geneIndex] == 1) x -= speed * damper;
-    		else if(genes[geneIndex] == 0) x += speed * damper;
-    		if(genes[geneIndex + 1] == 1) y -= speed * damper;
-    		else if(genes[geneIndex] == 0) y += speed * damper;
-    		
-//    		if(genes[geneIndex] == 1 && genes[geneIndex + 1] == 1) damper *= 0.5;
-//    		else if(genes[geneIndex] == 0 && genes[geneIndex + 1] == 0) damper = 0.05f;
-    		geneIndex += 2;
+	    	waitTimer += delta;
+	    	time += delta;
+    		if(waitTimer >= timeToWait) {
+    			timeToWait = 0;
+	    		float speed = genes[geneIndex].getSpeed();
+	    		if(genes[geneIndex].getDir() == 0) velX += speed * delta;
+	    		else if(genes[geneIndex].getDir() == 1) velX -= speed * delta;
+	    		else if(genes[geneIndex].getDir() == 2) velY += speed * delta;
+	    		else if(genes[geneIndex].getDir() == 3) velY -= speed * delta;
+	    		
+	    		waitTimer = 0;
+	    		timeToWait = genes[geneIndex].getTime();	    		
+//	    		body.applyForce(velX, velY, 0, 0, true);
+	    		geneIndex++;
+	    	}
     	}
+    	velX -= (velX > 0) ? delta : -delta;
+    	velY -= (velY > 0) ? delta : -delta;
+    	body.setLinearVelocity(velX, velY);
     }
     
     /*
      * Used for quick evoloution
      */
     public void calculateFinalPos(float delta) {
-    	for(byte b : genes) {
-    		move(delta);
+    	for(Gene b : genes) {
+    		if(body != null) {
+    			move(delta);
+    		}
     	}
     }
  
     
     public void dispose() {    	
+    	
     }
 
     /* Getters and setters */
@@ -73,13 +97,33 @@ public class Individual {
         defaultGeneLength = length;
     }
     
-    public byte getGene(int index) {
+    public Gene getGene(int index) {
         return genes[index];
     }
 
-    public void setGene(int index, byte value) {
-        genes[index] = value;
+    public void setGene(int index, Gene gene) {
+        genes[index] = gene;
         fitness = 0;
+    }
+    
+    public Gene getAverageGene() {
+    	float totalSpeed = 0;
+    	int totalDirection = 0;
+    	float totalTime = 0;
+    	float averageSpeed = 0;
+    	int averageDirection = 0;
+    	float averageTime = 0;
+    	for(int i = 0; i < genes.length; i++) {
+    		totalSpeed += genes[i].getSpeed();
+    		totalDirection += genes[i].getDir();
+    		totalTime += genes[i].getTime();
+    	}
+    	
+    	averageSpeed = totalSpeed / genes.length;
+    	averageDirection = totalDirection / genes.length;
+    	averageTime = totalTime / genes.length;
+    	
+    	return new Gene(averageSpeed, averageDirection, averageTime);
     }
     
     public float getTime() {
@@ -97,6 +141,8 @@ public class Individual {
         }
         return fitness;
     }
+    
+  
 
     @Override
     public String toString() {
