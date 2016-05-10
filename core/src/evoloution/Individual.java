@@ -10,6 +10,8 @@ import com.main.utils.Constants;
 
 public class Individual {
 
+	//tODO: allow the individuals to view their enviornment
+	
     static int defaultGeneLength = 64;
     private Color c;
     public int geneIndex;
@@ -22,20 +24,22 @@ public class Individual {
     private float time = 0;
     public Body body;
     
-    private static final int WIDTH = 8, HEIGHT = 8;
+    public int collisions = 0;
+    
+    public static final int WIDTH = 8, HEIGHT = 8;
     
     public Individual() {
-    	body = Evoloution.createMonsterBox((int)x, (int)y, WIDTH, HEIGHT, BodyType.DynamicBody);
+    	body = Evoloution.createMonsterBox(x, y, WIDTH, HEIGHT, BodyType.DynamicBody);
     	
     	c = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
     }
     
     // Create a random individual
     public void generateIndividual() {
-    	body = Evoloution.createMonsterBox((int)x, (int)y, WIDTH, HEIGHT, BodyType.DynamicBody);
+    	body = Evoloution.createMonsterBox(x, y, WIDTH, HEIGHT, BodyType.DynamicBody);
     	c = new Color(rand.nextFloat(), rand.nextFloat(), rand.nextFloat(), 1f);
         for (int i = 0; i < size(); i++) {
-            genes[i] = new Gene((float) (Math.random() * 500), (int)(Math.random() * 4), (float) (Math.random() * 2));
+            genes[i] = new Gene((float) (Math.random() * 1000), (int)(Math.random() * 4), (float) (Math.random() * 2));
         }
     }
     
@@ -46,39 +50,41 @@ public class Individual {
     }
     
     public void update(float delta) {
+    
     	move(delta);
     }
     
     private float timeToWait = 0;
     private float waitTimer = 0;
-    float velX = 0, velY = 0;
     private void move(float delta) {
+    	float velX = 0, velY = 0;
     	if(geneIndex < genes.length) {
 	    	waitTimer += delta;
 	    	time += delta;
     		if(waitTimer >= timeToWait) {
     			timeToWait = 0;
 	    		float speed = genes[geneIndex].getSpeed();
-	    		if(genes[geneIndex].getDir() == 0) velX += speed * delta;
-	    		else if(genes[geneIndex].getDir() == 1) velX -= speed * delta;
-	    		else if(genes[geneIndex].getDir() == 2) velY += speed * delta;
-	    		else if(genes[geneIndex].getDir() == 3) velY -= speed * delta;
+	    		if(genes[geneIndex].getDir() == 0) velX += speed;
+	    		else if(genes[geneIndex].getDir() == 1) velX -= speed;
+	    		else if(genes[geneIndex].getDir() == 2) velY += speed;
+	    		else if(genes[geneIndex].getDir() == 3) velY -= speed;
 	    		
 	    		waitTimer = 0;
 	    		timeToWait = genes[geneIndex].getTime();	    		
 //	    		body.applyForce(velX, velY, 0, 0, true);
 	    		geneIndex++;
 	    	}
+    	} else {
+    		body.setLinearVelocity(0, 0);
     	}
-    	velX -= (velX > 0) ? delta : -delta;
-    	velY -= (velY > 0) ? delta : -delta;
-    	body.setLinearVelocity(velX, velY);
+    	body.applyForceToCenter(velX, velY, true);
     }
     
     /*
      * Used for quick evoloution
      */
     public void calculateFinalPos(float delta) {
+    	geneIndex = 0;
     	for(Gene b : genes) {
     		if(body != null) {
     			move(delta);

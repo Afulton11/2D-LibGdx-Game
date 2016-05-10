@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.main.tiles.Tile;
 import com.main.utils.Direction;
 
 public class DummyMob extends B2DSprite{
@@ -50,8 +49,6 @@ public class DummyMob extends B2DSprite{
 				setBodyPosition(targetPos.x, targetPos.y);
 				targetPos = null;
 			}
-		} else {
-			System.out.println("null");
 		}
 	}
 	

@@ -23,7 +23,7 @@ public class Algorithm {
     	Iterator<Body> i = bodies.iterator();
     	   while(i.hasNext()){
     	      Body b = i.next();
-    	      if(b != Evoloution.platform && b != Evoloution.wall && b!= Evoloution.wall2
+    	      if(/*b != Evoloution.platform && */b != Evoloution.wall && b!= Evoloution.wall2 && b != Evoloution.wall3 && b != Evoloution.goalPoint
     	    		  && b != Evoloution.topWall && b!= Evoloution.bottomWall && b != Evoloution.rightWall && b != Evoloution.leftWall)
     	    	  Evoloution.world.destroyBody(b);
     	   }
@@ -56,6 +56,10 @@ public class Algorithm {
         for (int i = elitismOffset; i < newPopulation.size(); i++) {
             mutate(newPopulation.getIndividual(i));
         }
+        
+        for(Individual i : newPopulation.individuals) {
+        	i.collisions = 0;
+        }
 
         return newPopulation;
     }
@@ -81,7 +85,7 @@ public class Algorithm {
         for (int i = 0; i < indiv.size(); i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                indiv.setGene(i, new Gene((float) (Math.random() * 500f), (int)(Math.random() * 4), (float) (Math.random() * 2)));
+                indiv.setGene(i, new Gene((float) (Math.random() * 1000), (int)(Math.random() * 4), (float) (Math.random() * 2)));
             }
         }
     }

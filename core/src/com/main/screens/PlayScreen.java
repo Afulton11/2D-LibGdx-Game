@@ -3,8 +3,8 @@ package com.main.screens;
 import static com.main.utils.Constants.PPM;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -19,6 +19,9 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.main.Main;
 import com.main.entities.DummyMob;
 import com.main.entities.Player;
+import com.main.hud.Hud;
+import com.main.hud.HudManager;
+import com.main.hud.TestHud;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
 import com.main.tiles.Tile;
@@ -44,6 +47,9 @@ public class PlayScreen implements Screen {
 	
 	private Texture hudTex;
 	private Map map;
+	
+	private HudManager hudManager;
+	private TestHud testHud;
 	
 	public PlayScreen(final Main game) {
 		this.game = game;
@@ -75,6 +81,11 @@ public class PlayScreen implements Screen {
 						BodyDef.BodyType.StaticBody);
 			}
 		}
+		
+		hudManager = new HudManager();
+		Hud.setHudManager(hudManager);
+		testHud = new TestHud(1, 1, null);
+		testHud.setVisible(true);
 	}
 
 	@Override
@@ -100,11 +111,13 @@ public class PlayScreen implements Screen {
 		game.batch.draw(hudTex, 0, 0);
 		game.font16.draw(game.batch, "Screen: Play", 20, 40);
 		game.batch.end();
+		hudManager.render(game.batch);
 	}
 	
 	private void update(float delta) {
 		world.step(1f / Main.TARGET_UPS, 6, 2);
 		player.update(delta);
+		hudManager.update(delta);
 		mob.update(delta);
 		if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			mob.setTarget(player.getWorldPos());

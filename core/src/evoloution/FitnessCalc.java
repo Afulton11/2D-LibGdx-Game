@@ -32,15 +32,18 @@ public class FitnessCalc {
 	    // Calculate inidividuals fittness by comparing it to our candidate solution
 	    static int getFitness(Individual individual) {
 	        int fitness = 0;
-//	        // Loop through our individuals genes and compare them to our cadidates
-//	        for (int i = 0; i < individual.size() && i < solution.length; i++) {
-//	            if (individual.getGene(i) == solution[i]) {
-//	                fitness++;
-//	            }
-//	        }
+	        
 	        fitness = -(int) Vector2.dst(individual.body.getPosition().x * Constants.PPM, individual.body.getPosition().y * Constants.PPM, 
 	        		goalPoint.x * Constants.PPM, goalPoint.y * Constants.PPM);
 	        fitness -= (int) individual.getTime();
+	        
+	        fitness -= individual.collisions;
+	        
+	        for(int i = 0; i < Evoloution.GENE_LENGTH; i++) {
+	        	Gene g = individual.getGene(i);
+	        	if(g.getTime() < 2) fitness++;
+	        	if(g.getSpeed() > 250) fitness++;
+	        }
 	        return fitness;
 	    }
 	    
@@ -48,6 +51,6 @@ public class FitnessCalc {
 	    static int getMaxFitness() {
 //	        int maxFitness = solution.length;
 //	        return maxFitness;
-	    	return -1;
+	    	return Evoloution.GENE_LENGTH * 2;
 	    }
 }
