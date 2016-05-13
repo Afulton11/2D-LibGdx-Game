@@ -57,6 +57,8 @@ public class LoadingScreen implements Screen {
 		game.assets.setLoader(Map.class, new MapLoader(new InternalFileHandleResolver()));
 		game.assets.load("maps/map.json", Map.class);
 		game.assets.load("maps/sprite_sheet.png", Texture.class);
+		
+		game.assets.load("imgs/outline.png", Texture.class);
 		game.assets.finishLoading();
 	}
 

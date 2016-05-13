@@ -19,9 +19,10 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.main.Main;
 import com.main.entities.DummyMob;
 import com.main.entities.Player;
+import com.main.hud.ExInterface;
 import com.main.hud.Hud;
 import com.main.hud.HudManager;
-import com.main.hud.TestHud;
+import com.main.hud.TextureHud;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
 import com.main.tiles.Tile;
@@ -49,7 +50,6 @@ public class PlayScreen implements Screen {
 	private Map map;
 	
 	private HudManager hudManager;
-	private TestHud testHud;
 	
 	public PlayScreen(final Main game) {
 		this.game = game;
@@ -84,8 +84,6 @@ public class PlayScreen implements Screen {
 		
 		hudManager = new HudManager();
 		Hud.setHudManager(hudManager);
-		testHud = new TestHud(1, 1, null);
-		testHud.setVisible(true);
 	}
 
 	@Override
@@ -160,8 +158,7 @@ public class PlayScreen implements Screen {
 	public void dispose() {
 		world.dispose();
 		b2dr.dispose();
-		hudTex.dispose();
-		
+		hudManager.dispose();
 	}
 	
 	public static Body createBox(int x, int y, int width, int height, BodyDef.BodyType bodyType) {

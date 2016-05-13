@@ -82,4 +82,8 @@ public class HudManager {
 		huds.add(hud);
 	}
 
+	public void dispose() {
+		for(Hud h : huds) h.dispose();
+	}
+
 }

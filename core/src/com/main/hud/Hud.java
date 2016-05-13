@@ -1,5 +1,6 @@
 package com.main.hud;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -15,7 +16,10 @@ public abstract class Hud {
 	private boolean update, render;
 	
 	protected float xPos, yPos;
+	protected int width, height;
 	protected static HudManager manager;
+	
+	private Texture texture;
 	
 	/**
 	 * Creates a new Hud at the x, y location.
@@ -30,6 +34,14 @@ public abstract class Hud {
 			System.err.println("Please Instansiate the HudManager for all Huds by using Hud.setHudManager(HudManager hudManager).");
 		}
 		manager.addHud(this);
+	}
+	
+	public void setTexture(Texture tex) {
+		this.texture = tex;
+	}
+	
+	public Texture getTexture() {
+		return texture;
 	}
 	
 	/**
@@ -80,7 +92,7 @@ public abstract class Hud {
 	/**
 	 * Start Updating a HUD so it can reply to actions
 	 */
-	private void startUpdating() {
+	protected void startUpdating() {
 		if(update) {
 			System.err.println("Attempted to start an update on a HUD even though it is already being updated!");
 			return;
@@ -88,7 +100,7 @@ public abstract class Hud {
 		update = true;
 	}
 	
-	private void stopUpdating() {
+	protected void stopUpdating() {
 		if(!update) {
 			System.err.println("Attempted to stop an update on a HUD even though it isn't being updated!");
 			return;
@@ -99,7 +111,7 @@ public abstract class Hud {
 	/**
 	 * start rendering the HUD.
 	 */
-	private void startRendering() {
+	protected void startRendering() {
 		if(render) {
 			System.err.println("Attempted to start a render on a HUD even though it is already being rendered!");
 			return;
@@ -110,12 +122,16 @@ public abstract class Hud {
 	/**
 	 * stop rendering the HUD.
 	 */
-	private void stopRendering() {
+	protected void stopRendering() {
 		if(!render) {
 			System.err.println("Attempted to stop a render on a HUD even though it isn't being rendered!");
 			return;
 		}
 		render = false;
+	}
+	
+	public void dispose() {
+		texture.dispose();
 	}
 	
 }
