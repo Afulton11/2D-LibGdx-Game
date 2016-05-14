@@ -59,6 +59,8 @@ public class LoadingScreen implements Screen {
 		game.assets.load("maps/sprite_sheet.png", Texture.class);
 		
 		game.assets.load("imgs/outline.png", Texture.class);
+		game.assets.load("imgs/buttonUp.png", Texture.class);
+		game.assets.load("imgs/buttonDown.png", Texture.class);
 		game.assets.finishLoading();
 	}
 
@@ -66,8 +68,8 @@ public class LoadingScreen implements Screen {
 		progress = MathUtils.lerp(progress, game.assets.getProgress(), .1f); //lerp = (a + (b - a) * damper
 		
 		if(game.assets.update() && game.assets.getProgress() - progress < 0.05f) { //returns false until all the assets have finished loading.
-			game.setScreen(game.splashScreen);
-//			game.setScreen(game.mainMenuScreen);
+//			game.setScreen(game.splashScreen);
+			game.setScreen(game.mainMenuScreen);
 		}
 		
 	}

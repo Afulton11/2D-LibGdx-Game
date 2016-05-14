@@ -21,6 +21,7 @@ import com.main.entities.DummyMob;
 import com.main.entities.Player;
 import com.main.hud.ExInterface;
 import com.main.hud.Hud;
+import com.main.hud.HudButton;
 import com.main.hud.HudManager;
 import com.main.hud.TextureHud;
 import com.main.tiles.Map;
@@ -50,6 +51,8 @@ public class PlayScreen implements Screen {
 	private Map map;
 	
 	private HudManager hudManager;
+	private ExInterface face;
+	private HudButton testBtn;
 	
 	public PlayScreen(final Main game) {
 		this.game = game;
@@ -60,6 +63,7 @@ public class PlayScreen implements Screen {
 		
 		world = new World(new Vector2(0, 0), false);
 		b2dr = new Box2DDebugRenderer();
+		
 		
 	}
 	
@@ -84,6 +88,13 @@ public class PlayScreen implements Screen {
 		
 		hudManager = new HudManager();
 		Hud.setHudManager(hudManager);
+		
+		face = new ExInterface(60, 60, new TextureHud(0, 0, 256, 256, game.assets.get("imgs/outline.png", Texture.class)));
+		testBtn = new HudButton(50, 50, 128, 32, game.assets.get("imgs/buttonUp.png", Texture.class), game.assets.get("imgs/buttonDown.png", Texture.class));
+		face.addHud(testBtn);
+		face.setVisible(true);
+		hudManager.addHud(face);
+		hudManager.addHud(testBtn);
 	}
 
 	@Override
@@ -158,7 +169,7 @@ public class PlayScreen implements Screen {
 	public void dispose() {
 		world.dispose();
 		b2dr.dispose();
-		hudManager.dispose();
+		if(hudManager != null) hudManager.dispose();
 	}
 	
 	public static Body createBox(int x, int y, int width, int height, BodyDef.BodyType bodyType) {

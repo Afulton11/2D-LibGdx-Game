@@ -59,9 +59,7 @@ public class Main extends Game {
 		mainMenuScreen = new MainMenuScreen(this);
 		playScreen = new PlayScreen(this);
 	
-		
 		setScreen(loadingScreen);
-	
 	}
 	
 	@Override

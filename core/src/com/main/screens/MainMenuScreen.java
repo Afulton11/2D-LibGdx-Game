@@ -20,6 +20,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.main.Main;
+import com.main.utils.Utils;
 
 public class MainMenuScreen implements Screen{
 
@@ -120,7 +121,6 @@ public class MainMenuScreen implements Screen{
 	private int time = 0;
 	private void update(float delta) {
 		stage.act(delta);
-		
 		
 		time++;
 		if(time < 41 && time % 20 == 0) {
