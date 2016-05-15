@@ -25,6 +25,8 @@ public class Main extends Game {
 	
 	public static final String TITLE = "Project Ex";
 	public static final int V_WIDTH = 400, V_HEIGHT = 300;
+	public static double SCREEN_TO_PIXEL_RATIO_WIDTH;
+	public static double SCREEN_TO_PIXEL_RATIO_HEIGHT;
 	
 	public OrthographicCamera camera;
 	public SpriteBatch batch;
@@ -45,6 +47,8 @@ public class Main extends Game {
 	@Override
 	public void create () {
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
+		SCREEN_TO_PIXEL_RATIO_WIDTH = V_WIDTH / Gdx.graphics.getWidth();
+		SCREEN_TO_PIXEL_RATIO_HEIGHT = V_HEIGHT / Gdx.graphics.getWidth();
 		assets = new AssetManager();
 	
 		batch = new SpriteBatch();

@@ -29,8 +29,7 @@ public class HudManager {
 	public void render(SpriteBatch hudBatch) {
 		hudBatch.begin();
 		for(Hud hud : huds) {
-			if(hud.shouldRender())
-				hud.render(hudBatch);
+			if(hud.shouldRender()) hud.render(hudBatch);
 		}
 		hudBatch.end();
 	}

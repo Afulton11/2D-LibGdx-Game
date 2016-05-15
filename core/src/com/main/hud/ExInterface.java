@@ -16,6 +16,13 @@ public class ExInterface extends Hud{
 	private Hud backgroundHud;
 	private Array<Hud> huds;
 	
+	public ExInterface(float screenX, float screenY, int width, int height) {
+		super(screenX, screenY);
+		huds = new Array<Hud>();
+		this.width = width;
+		this.height = height;
+	}
+	
 	public ExInterface(float screenX, float screenY, Hud backgroundHud) {
 		super(screenX, screenY);
 		this.backgroundHud = backgroundHud;
@@ -70,6 +77,10 @@ public class ExInterface extends Hud{
 		huds.add(hud);
 	}
 	
+	public void addButton(Texture up, Texture down, float x, float y, int width, int height) {
+		huds.add(new HudButton(x + this.xPos, y + this.yPos, width, height, up, down));
+	}
+	
 	public void setPosition(Vector2 position) {
 		this.xPos  = position.x;
 		this.yPos = position.y;
@@ -89,6 +100,10 @@ public class ExInterface extends Hud{
 	
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public void setBackgroundHud(Hud bgHud) {
+		this.backgroundHud = bgHud;
 	}
 	
 	@Override

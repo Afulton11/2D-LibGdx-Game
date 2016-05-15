@@ -47,6 +47,14 @@ public class B2DSprite {
 		return new Vector2(getBodyPositionX(), getBodyPositionY());
 	}
 	
+	public int getTileX() {
+		return (int) Math.floor(getBodyPositionX() / Constants.TILE_SIZE);
+	}
+	
+	public int getTileY() {
+		return (int) Math.floor(getBodyPositionY() / Constants.TILE_SIZE);
+	}
+	
 	protected void addBodyPosition(float xAmt, float yAmt) {
 		body.getPosition().x += xAmt / Constants.PPM;
 		body.getPosition().y += xAmt / Constants.PPM;
@@ -58,10 +66,10 @@ public class B2DSprite {
 	}
 	
 	protected float getBodyPositionX() {
-		return body.getPosition().x * Constants.PPM - width / 2 + offsetX;
+		return body.getPosition().x * Constants.PPM + offsetX;
 	}
 	
 	protected float getBodyPositionY() {
-		return body.getPosition().y * Constants.PPM - width / 2 + offsetX;
+		return body.getPosition().y * Constants.PPM + offsetX;
 	}
 }

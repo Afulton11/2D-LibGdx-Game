@@ -35,6 +35,7 @@ import com.badlogic.gdx.graphics.g3d.particles.ResourceData.AssetData;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.math.Interpolation;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -341,13 +342,18 @@ public class MapCreator extends Game {
 		
 		private void drawMapOutline() {
 			shapeRenderer.begin(ShapeType.Line);
+			Rectangle camRect = new Rectangle();
+			camRect.set(mapCam.position.x - mapCam.viewportWidth, mapCam.position.y - mapCam.viewportHeight, mapCam.viewportWidth * mapCam.zoom * 2, 
+					mapCam.viewportWidth * mapCam.zoom * 2);
 			if(currentMap != null) {
 				shapeRenderer.setColor(1, 1, 1, 0.5f);
 				for(Tile t: currentMap.getTiles()) {
-					shapeRenderer.rect(t.getPixelCoords().x, t.getPixelCoords().y, Constants.TILE_SIZE, Constants.TILE_SIZE);
-					batch.begin();
-					t.render(batch);
-					batch.end();
+					if(camRect.contains(t.getPixelCoords())) {
+						shapeRenderer.rect(t.getPixelCoords().x, t.getPixelCoords().y, Constants.TILE_SIZE, Constants.TILE_SIZE);
+						batch.begin();
+						t.render(batch);
+						batch.end();
+					}
 				}
 			}
 			shapeRenderer.end();
@@ -396,24 +402,18 @@ public class MapCreator extends Game {
 		private long lastUndoTime = 0;
 		private void handleTilePlacement(float delta) {
 			if(touchReleased && Gdx.input.isButtonPressed(0)) {
-				touchReleased = false;
 				if(currentMap != null) {
-					int index = (int)mouseTile.getTileCoordinates().x + (int)mouseTile.getTileCoordinates().y * currentMap.getTileWidth();
-					if(index > -1 && index < currentMap.getTileWidth() * currentMap.getTileHeight()) {
+					int index = (int) (mouseTile.getTileCoordinates().x + mouseTile.getTileCoordinates().y * currentMap.getTileWidth());
+					if(index > -1 && index < currentMap.getTiles().size) {
 						Tile t = mouseTile.tile.copy();
 						t.setTileCoordinates(new TileCoord(mouseTile.getTileCoordinates()));
-						System.out.println("Tile x: " + t.getTileCoords().coords.x + " Tile Y: " + t.getTileCoords().coords.y);
 						currentMap.getTiles().set(index, t);
 						placedTiles.add(t);
 					}
 				}
-			} else if(!Gdx.input.isButtonPressed(0)){
-				touchReleased = true;
-			}
-			System.out.println();
+			} 
 			if(placedTiles.size > 0 && TimeUtils.millis() - lastUndoTime > 100 &&  
-					Gdx.input.isKeyPressed(Keys.Z) && Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)) {
-				System.out.println("Undo");
+				Gdx.input.isKeyPressed(Keys.Z) && Gdx.input.isKeyPressed(Keys.CONTROL_LEFT)) {
 				lastUndoTime = TimeUtils.millis();
 				currentMap.removeTile(this.placedTiles.get(placedTiles.size - 1));
 				placedTiles.removeIndex(placedTiles.size - 1);

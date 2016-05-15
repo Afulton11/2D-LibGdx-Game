@@ -61,6 +61,7 @@ public class LoadingScreen implements Screen {
 		game.assets.load("imgs/outline.png", Texture.class);
 		game.assets.load("imgs/buttonUp.png", Texture.class);
 		game.assets.load("imgs/buttonDown.png", Texture.class);
+		game.assets.load("imgs/bank_bg.png", Texture.class);
 		game.assets.finishLoading();
 	}
 

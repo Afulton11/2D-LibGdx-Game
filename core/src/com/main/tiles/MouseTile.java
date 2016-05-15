@@ -36,7 +36,7 @@ public class MouseTile extends Tile{
 	}
 	
 	public Vector2 getTileCoordinates() {
-		return new Vector2((int) (pixelX / Constants.TILE_SIZE), (int)(pixelY / Constants.TILE_SIZE));
+		return new Vector2((int) Math.floor(pixelX / Constants.TILE_SIZE), (int)Math.floor(pixelY / Constants.TILE_SIZE));
 	}
 	
 	

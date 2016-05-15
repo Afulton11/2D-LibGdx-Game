@@ -19,10 +19,11 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.main.Main;
 import com.main.entities.DummyMob;
 import com.main.entities.Player;
+import com.main.hud.BankInterface;
 import com.main.hud.ExInterface;
 import com.main.hud.Hud;
-import com.main.hud.HudButton;
 import com.main.hud.HudManager;
+import com.main.hud.MiniMapHud;
 import com.main.hud.TextureHud;
 import com.main.tiles.Map;
 import com.main.tiles.MapTerrainSheet;
@@ -47,12 +48,11 @@ public class PlayScreen implements Screen {
 	private Player player;
 	private DummyMob mob;
 	
-	private Texture hudTex;
 	private Map map;
 	
 	private HudManager hudManager;
-	private ExInterface face;
-	private HudButton testBtn;
+	private BankInterface bank;
+	private MiniMapHud miniMap;
 	
 	public PlayScreen(final Main game) {
 		this.game = game;
@@ -60,21 +60,20 @@ public class PlayScreen implements Screen {
 		camera.setToOrtho(false, Main.V_WIDTH, Main.V_HEIGHT);
 		hudCam = new OrthographicCamera();
 		hudCam.setToOrtho(false, Main.V_WIDTH, Main.V_HEIGHT);
-		
+
 		world = new World(new Vector2(0, 0), false);
 		b2dr = new Box2DDebugRenderer();
-		
-		
 	}
 	
 	@Override
 	public void show() {
-
 		map = game.assets.get("maps/map.json", Map.class);
+		map.createBounds();
 		MapTerrainSheet.init(game.assets.get("maps/sprite_sheet.png", Texture.class), Constants.TILE_SIZE);
 		lastUpdateTime = 0;
-		hudTex = game.assets.get("imgs/hud.png", Texture.class);
-		player = new Player(createBox(Main.V_WIDTH / 2, Main.V_HEIGHT / 2, 16, 16, BodyDef.BodyType.DynamicBody), game.assets);
+		player = new Player(createBox(map.getTileWidth() * Constants.TILE_SIZE / 2, map.getTileHeight() * Constants.TILE_SIZE / 2, 
+				16, 16, BodyDef.BodyType.KinematicBody), game.assets);
+		map.setPlayer(player);
 		mob = new DummyMob(createBox(15, 15, 16, 16, BodyDef.BodyType.DynamicBody), game.assets);
 		
 		for(Tile t : map.getTiles()) {
@@ -89,12 +88,16 @@ public class PlayScreen implements Screen {
 		hudManager = new HudManager();
 		Hud.setHudManager(hudManager);
 		
-		face = new ExInterface(60, 60, new TextureHud(0, 0, 256, 256, game.assets.get("imgs/outline.png", Texture.class)));
-		testBtn = new HudButton(50, 50, 128, 32, game.assets.get("imgs/buttonUp.png", Texture.class), game.assets.get("imgs/buttonDown.png", Texture.class));
-		face.addHud(testBtn);
-		face.setVisible(true);
-		hudManager.addHud(face);
-		hudManager.addHud(testBtn);
+		miniMap = new MiniMapHud(map, player, 275, 200, 125, 100);
+		ExInterface gameHudInterface = new ExInterface(0, 0, Main.V_WIDTH, Main.V_HEIGHT, miniMap);
+		hudManager.addHud(gameHudInterface);
+		
+		TextureHud gameHud = new TextureHud(0, 0, Main.V_WIDTH, Main.V_HEIGHT, game.assets.get("imgs/hud.png", Texture.class));
+		gameHudInterface.addHud(gameHud);
+		gameHudInterface.setVisible(true);
+		
+		bank = new BankInterface(game.assets, 15, 85, 250, 200);
+		hudManager.addHud(bank);
 	}
 
 	@Override
@@ -117,7 +120,6 @@ public class PlayScreen implements Screen {
 
 		game.batch.setProjectionMatrix(hudCam.combined);
 		game.batch.begin();
-		game.batch.draw(hudTex, 0, 0);
 		game.font16.draw(game.batch, "Screen: Play", 20, 40);
 		game.batch.end();
 		hudManager.render(game.batch);
@@ -130,6 +132,10 @@ public class PlayScreen implements Screen {
 		mob.update(delta);
 		if(Gdx.input.isKeyJustPressed(Keys.ENTER)) {
 			mob.setTarget(player.getWorldPos());
+		}
+		
+		if(Gdx.input.isKeyJustPressed(Keys.B)) {
+			bank.setVisible(!bank.shouldRender());
 		}
 		cameraUpdate(delta);
 	}

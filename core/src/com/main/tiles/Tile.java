@@ -1,5 +1,9 @@
 package com.main.tiles;
 
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Pixmap.Format;
+import com.badlogic.gdx.graphics.TextureData;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -72,6 +76,30 @@ public class Tile {
 	
 	public TextureRegion getTextureRegion() {
 		return MapTerrainSheet.getTextureRegion(textureX, textureY);
+	}
+	private Color def_Color = new Color(200f, 200f, 200f, 190f);
+	public Pixmap getTexturePixmap(int size) {
+		Pixmap pix = new Pixmap(size, size, Format.RGBA8888);
+		if(size > 1) {
+			TextureData data = getTextureRegion().getTexture().getTextureData();
+			data.prepare();
+			Pixmap texturePix = data.consumePixmap();
+			pix.drawPixmap(texturePix, 0, 0, Constants.TILE_SIZE, Constants.TILE_SIZE, 0, 0, size, size);
+		} else {
+			switch(id) {
+			case 1:
+				pix.setColor(Color.GREEN);
+				break;
+			case 2:
+				pix.setColor(Color.GRAY);
+				break;
+			default:
+				pix.setColor(def_Color);
+				break;
+			}
+			pix.drawPixel(0, 0);
+		}
+		return pix;
 	}
 	
 	public Tile copy() {
