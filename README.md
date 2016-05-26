@@ -1,4 +1,5 @@
 # 2D-LibGdx-Game
+I Will br redoing this project at a later time as much of the code is not organized very well.
 A Simple 2D Game made using LibGdx with a custom made Map Editor.
 
 End Game Goals
